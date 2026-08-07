@@ -1,0 +1,63 @@
+@use '../styles/variables' as *;
+
+.footer {
+  padding: 28px 60px;
+  border-top: 1px solid $border;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: $bg;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  @media (max-width: $mobile) {
+    padding: 24px;
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: $white;
+
+  span { color: $accent; }
+}
+
+.copy {
+  font-family: $font-mono;
+  font-size: 0.68rem;
+  color: $muted;
+}
+
+.center {
+  font-family: $font-mono;
+  font-size: 0.68rem;
+  color: $muted;
+}
+
+.right {
+  display: flex;
+  gap: 24px;
+
+  a {
+    font-family: $font-mono;
+    font-size: 0.68rem;
+    color: $muted;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+
+    &:hover { color: $accent; }
+  }
+}

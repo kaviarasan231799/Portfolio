@@ -1,0 +1,126 @@
+@use '../styles/variables' as *;
+
+.experience {
+  background: $bg;
+}
+
+.timeline {
+  position: relative;
+  padding-left: 36px;
+}
+
+.line {
+  position: absolute;
+  left: 4px;
+  top: 10px;
+  bottom: 10px;
+  width: 1px;
+  background: linear-gradient(to bottom, $accent, rgba(61,232,192,0.3), transparent);
+}
+
+.item {
+  position: relative;
+  margin-bottom: 60px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.dot {
+  position: absolute;
+  left: -40px;
+  top: 8px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid $bg;
+}
+
+.card {
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: 8px;
+  padding: 32px 36px;
+  box-shadow: var(--card-shadow);
+  transition: border-color 0.25s, box-shadow 0.25s;
+
+  &:hover {
+    border-color: var(--border-hover);
+  }
+
+  @media (max-width: $mobile) {
+    padding: 24px 20px;
+  }
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.company {
+  font-family: $font-mono;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.type {
+  font-family: $font-mono;
+  font-size: 0.65rem;
+  color: $muted;
+  background: $surface2;
+  border: 1px solid $border;
+  padding: 3px 10px;
+  border-radius: 100px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.period {
+  font-family: $font-mono;
+  font-size: 0.68rem;
+  color: $muted;
+  margin-left: auto;
+
+  @media (max-width: $mobile) {
+    margin-left: 0;
+  }
+}
+
+.role {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: $white;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+
+  li {
+    color: $muted;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    padding-left: 22px;
+    position: relative;
+
+    &::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: $accent;
+      font-size: 0.8rem;
+      line-height: 1.7;
+    }
+  }
+}

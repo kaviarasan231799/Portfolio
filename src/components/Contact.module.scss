@@ -1,0 +1,197 @@
+@use '../styles/variables' as *;
+
+.contact {
+  background: $surface;
+  border-top: 1px solid $border;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 80px;
+  align-items: start;
+
+  @media (max-width: $tablet) {
+    grid-template-columns: 1fr;
+    gap: 52px;
+  }
+}
+
+.left {}
+
+.heading {
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  font-weight: 800;
+  color: $white;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+
+  em {
+    font-family: $font-serif;
+    font-style: italic;
+    font-weight: 400;
+    color: $accent;
+  }
+}
+
+.subtext {
+  color: $muted;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  margin-bottom: 40px;
+  max-width: 480px;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: $bg;
+  border: 1px solid $border;
+  border-radius: 7px;
+  padding: 18px 22px;
+  transition: $transition;
+  color: $text;
+
+  &:hover {
+    border-color: $accent;
+    color: $accent;
+    transform: translateX(6px);
+
+    .arrow { opacity: 1; transform: translateX(0); }
+  }
+}
+
+.linkIcon {
+  font-size: 1.1rem;
+  width: 32px;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.linkLabel {
+  font-family: $font-mono;
+  font-size: 0.65rem;
+  color: $muted;
+  display: block;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.linkValue {
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: block;
+}
+
+.arrow {
+  margin-left: auto;
+  font-size: 1rem;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: $transition;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 60px;
+
+  @media (max-width: $tablet) {
+    padding-top: 0;
+  }
+}
+
+.socials {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.socialCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: $bg;
+  border: 1px solid $border;
+  border-radius: 7px;
+  padding: 20px 24px;
+  transition: $transition;
+  color: $text;
+
+  &:hover {
+    border-color: rgba(61, 232, 192, 0.3);
+    color: $accent2;
+
+    .socialArrow {
+      transform: translate(3px, -3px);
+    }
+  }
+}
+
+.socialName {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.socialHandle {
+  font-family: $font-mono;
+  font-size: 0.72rem;
+  color: $muted;
+  margin-left: 4px;
+}
+
+.socialArrow {
+  margin-left: auto;
+  font-size: 1rem;
+  color: $muted;
+  transition: transform 0.2s ease;
+}
+
+.availability {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(100, 255, 130, 0.04);
+  border: 1px solid rgba(100, 255, 130, 0.15);
+  border-radius: 7px;
+  padding: 20px 24px;
+}
+
+.availDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: $accent;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px $accent;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.availTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: $accent;
+  margin-bottom: 3px;
+}
+
+.availSub {
+  font-family: $font-mono;
+  font-size: 0.68rem;
+  color: $muted;
+  letter-spacing: 0.08em;
+}

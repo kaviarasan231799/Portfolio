@@ -1,0 +1,69 @@
+@use '../styles/variables' as *;
+
+.education {
+  background: $bg;
+  border-top: 1px solid $border;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: 7px;
+  padding: 26px 32px;
+  box-shadow: var(--card-shadow);
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+
+  &:hover {
+    border-color: var(--border-hover);
+    transform: translateX(6px);
+  }
+
+  @media (max-width: $mobile) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 20px 20px;
+  }
+}
+
+.year {
+  font-family: $font-mono;
+  font-size: 0.7rem;
+  color: $muted;
+  min-width: 100px;
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+}
+
+.divider {
+  width: 1px;
+  height: 36px;
+  background: $border;
+  flex-shrink: 0;
+
+  @media (max-width: $mobile) {
+    display: none;
+  }
+}
+
+.degree {
+  font-size: 1rem;
+  font-weight: 600;
+  color: $white;
+  margin-bottom: 5px;
+}
+
+.inst {
+  font-size: 0.85rem;
+  color: $muted;
+  font-family: $font-mono;
+}

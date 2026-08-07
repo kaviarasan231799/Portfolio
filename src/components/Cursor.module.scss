@@ -1,0 +1,49 @@
+@use '../styles/variables' as *;
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background: $accent;
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: transform 0.05s linear;
+
+  &.hover {
+    transform: scale(2.5) !important;
+  }
+
+  @media (max-width: $mobile) {
+    display: none;
+  }
+}
+
+.ring {
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid $accent;
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.45;
+  transition: opacity 0.2s ease, width 0.2s ease, height 0.2s ease;
+
+  &.hover {
+    width: 52px;
+    height: 52px;
+    opacity: 0.8;
+    margin-top: -8px;
+    margin-left: -8px;
+  }
+
+  @media (max-width: $mobile) {
+    display: none;
+  }
+}

@@ -1,0 +1,252 @@
+@use '../styles/variables' as *;
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 130px 60px 90px;
+  position: relative;
+  overflow: hidden;
+
+  @media (max-width: $mobile) {
+    padding: 110px 24px 70px;
+  }
+}
+
+.gridBg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient($border 1px, transparent 1px),
+    linear-gradient(90deg, $border 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 85% 85% at 50% 50%, black 30%, transparent 100%);
+  pointer-events: none;
+}
+
+.glow1 {
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, var(--glow1) 0%, transparent 65%);
+  top: -5%;
+  left: -15%;
+  pointer-events: none;
+}
+
+.glow2 {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--glow2) 0%, transparent 65%);
+  bottom: 5%;
+  right: 0%;
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 960px;
+}
+
+.eyebrow {
+  font-family: $font-mono;
+  font-size: 0.75rem;
+  color: $accent;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: $accent;
+  box-shadow: 0 0 12px $accent;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.8); }
+}
+
+.name {
+  font-size: clamp(4rem, 10vw, 9rem);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: $white;
+  margin-bottom: 28px;
+
+  em {
+    font-family: $font-serif;
+    font-style: italic;
+    font-weight: 400;
+    color: $accent;
+    font-size: clamp(3.5rem, 9vw, 8.2rem);
+    display: block;
+  }
+}
+
+.tagline {
+  font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+  color: $muted;
+  font-weight: 400;
+  max-width: 560px;
+  line-height: 1.75;
+  margin-bottom: 36px;
+
+  strong {
+    color: $text;
+    font-weight: 600;
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-bottom: 48px;
+}
+
+.tag {
+  font-family: $font-mono;
+  font-size: 0.7rem;
+  padding: 6px 14px;
+  border-radius: 100px;
+  border: 1px solid $border;
+  color: $muted;
+  background: $surface;
+  letter-spacing: 0.06em;
+  transition: $transition;
+
+  &:hover {
+    border-color: rgba(100, 255, 130, 0.3);
+    color: $accent;
+    background: rgba(100, 255, 130, 0.05);
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btnPrimary {
+  padding: 14px 32px;
+  background: $accent;
+  color: var(--btn-primary-text);
+  font-family: $font-display;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  transition: $transition;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 44px rgba(100, 255, 130, 0.28);
+  }
+}
+
+.btnOutline {
+  padding: 14px 32px;
+  border: 1px solid $border;
+  color: $text;
+  font-family: $font-display;
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  transition: $transition;
+
+  &:hover {
+    border-color: $accent;
+    color: $accent;
+  }
+}
+
+.btnGhost {
+  padding: 14px 24px;
+  color: $muted;
+  font-family: $font-mono;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+
+  &:hover { color: $accent2; }
+}
+
+.scroll {
+  position: absolute;
+  bottom: 44px;
+  right: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  @media (max-width: $mobile) {
+    display: none;
+  }
+}
+
+.scrollLabel {
+  font-family: $font-mono;
+  font-size: 0.6rem;
+  color: $muted;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+}
+
+.scrollLine {
+  width: 1px;
+  height: 64px;
+  background: linear-gradient(to bottom, rgba(100, 255, 130, 0.4), transparent);
+  animation: scrollAnim 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollAnim {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+.badge {
+  position: absolute;
+  bottom: 44px;
+  left: 60px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: $font-mono;
+  font-size: 0.68rem;
+  color: $muted;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  @media (max-width: $mobile) {
+    display: none;
+  }
+}
+
+.badgeDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: $accent;
+  animation: pulse 2s ease-in-out infinite;
+}
