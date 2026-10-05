@@ -1,0 +1,461 @@
+@use '../styles/variables' as *;
+
+.telemetryCard {
+  background: rgba(14, 16, 22, 0.85);
+  border: 1px solid rgba(0, 255, 135, 0.25);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 255, 135, 0.08);
+  backdrop-filter: blur(16px);
+  position: relative;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-family: $font-mono;
+
+  &:hover {
+    border-color: rgba(0, 255, 135, 0.45);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 45px rgba(0, 255, 135, 0.12);
+  }
+}
+
+.cockpitHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: rgba(8, 10, 14, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+
+  &.nominal {
+    background: #00ff87;
+    box-shadow: 0 0 8px #00ff87;
+    animation: pulseGlow 1.8s infinite ease-in-out;
+  }
+
+  &.alerting {
+    background: #ff4b4b;
+    box-shadow: 0 0 12px #ff4b4b;
+    animation: flashAlert 0.4s infinite alternate;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.25); opacity: 0.6; }
+}
+
+@keyframes flashAlert {
+  0% { transform: scale(1); opacity: 0.5; }
+  100% { transform: scale(1.3); opacity: 1; }
+}
+
+.liveTag {
+  color: var(--white);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.pipe {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.wsInfo {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #00f0ff;
+}
+
+.pulseIcon {
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+.packetBadge {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--muted);
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 0.68rem;
+}
+
+.viewToggle {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text);
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-family: $font-mono;
+  transition: all 0.2s ease;
+
+  &:hover, &.active {
+    background: rgba(0, 255, 135, 0.15);
+    border-color: #00ff87;
+    color: #00ff87;
+  }
+}
+
+// Machine Selector Tabs
+.machineTabs {
+  display: flex;
+  gap: 2px;
+  padding: 8px 12px 0;
+  background: rgba(10, 12, 16, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    height: 3px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.machineTab {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 8px 14px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  color: var(--muted);
+  font-family: $font-mono;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+
+  &:hover {
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  &.activeTab {
+    color: var(--white);
+    border-bottom-color: #00ff87;
+    background: rgba(0, 255, 135, 0.06);
+  }
+}
+
+.tabName {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.tabClient {
+  font-size: 0.65rem;
+  color: #00f0ff;
+  opacity: 0.85;
+}
+
+// Cockpit Body
+.cockpitBody {
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+// Metrics Grid
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+
+  @media (max-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.metricTile {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 10px 12px;
+  transition: all 0.25s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  &.tileAlert {
+    border-color: #ff4b4b;
+    background: rgba(255, 75, 75, 0.12);
+    animation: flashBorder 0.6s infinite alternate;
+  }
+}
+
+@keyframes flashBorder {
+  0% { box-shadow: inset 0 0 4px #ff4b4b; }
+  100% { box-shadow: inset 0 0 14px #ff4b4b; }
+}
+
+.tileHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+
+.tileUnit {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.6rem;
+}
+
+.tileValue {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--white);
+  font-family: $font-display;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.tileSub {
+  font-size: 0.65rem;
+  color: var(--muted);
+  font-family: $font-mono;
+  font-weight: 400;
+}
+
+.progressBar {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.4s ease, background-color 0.3s ease;
+}
+
+// Sparkline Container
+.sparklineContainer {
+  background: rgba(4, 6, 8, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+
+.sparklineHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.65rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.sparkTitle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #00ff87;
+  font-weight: 600;
+}
+
+.thresholdMarker {
+  color: #ffd166;
+  font-size: 0.62rem;
+}
+
+.canvasGraph {
+  width: 100%;
+  height: 95px;
+  display: block;
+  border-radius: 4px;
+}
+
+// Action Row
+.actionRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.spikeBtn {
+  background: linear-gradient(135deg, rgba(255, 75, 75, 0.15), rgba(255, 183, 3, 0.15));
+  border: 1px solid rgba(255, 183, 3, 0.4);
+  color: #ffd166;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: $font-mono;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: all 0.25s ease;
+
+  &:hover:not(:disabled) {
+    background: linear-gradient(135deg, rgba(255, 75, 75, 0.28), rgba(255, 183, 3, 0.28));
+    border-color: #ffd166;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(255, 183, 3, 0.25);
+  }
+
+  &.spikeActive {
+    background: #ff4b4b;
+    color: #ffffff;
+    border-color: #ff4b4b;
+    box-shadow: 0 0 20px rgba(255, 75, 75, 0.5);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+}
+
+.spin {
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.systemStatusBadge {
+  font-size: 0.72rem;
+  font-family: $font-mono;
+}
+
+.statusNominal {
+  color: #00ff87;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.statusBreach {
+  color: #ff4b4b;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  animation: flashAlert 0.4s infinite alternate;
+}
+
+// Log Terminal
+.eventLog {
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.logHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.65rem;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.logList {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  max-height: 60px;
+  overflow-y: auto;
+}
+
+.logItem {
+  font-size: 0.68rem;
+  color: var(--muted);
+  line-height: 1.35;
+
+  &.logAlert {
+    color: #ff6b6b;
+    font-weight: 600;
+  }
+}
+
+.logTime {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+// Raw View
+.rawTerminal {
+  padding: 14px 18px;
+  background: #05070a;
+}
+
+.terminalBar {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 6px;
+}
+
+.greenText {
+  color: #00ff87;
+}
+
+.jsonOutput {
+  color: #00f0ff;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  overflow-x: auto;
+  max-height: 280px;
+}
+
+// Cockpit Footer
+.cockpitFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 18px;
+  background: rgba(6, 8, 11, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.68rem;
+  color: var(--muted);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.impactSnippet {
+  color: #00ff87;
+  font-weight: 600;
+}

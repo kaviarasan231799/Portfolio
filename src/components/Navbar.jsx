@@ -1,29 +1,29 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Terminal, Volume2, VolumeX, Moon, Sun, Menu, X, Radio } from 'lucide-react';
+import { sfx } from '../utils/audio';
 import styles from './Navbar.module.scss';
 
 const links = [
-  { href: '#about', label: 'About' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#experience', label: 'Experience' },
+  { href: '#home', label: 'Mission' },
+  { href: '#about', label: 'Dossier' },
+  { href: '#skills', label: 'Ecosystem' },
   { href: '#projects', label: 'Projects' },
-  { href: '#contact', label: 'Contact' },
+  { href: '#contact', label: 'Dispatch' },
 ];
 
-export default function Navbar() {
+export default function Navbar({ onOpenCommandPalette, onToggleSound, isSoundMuted }) {
   const [scrolled, setScrolled] = useState(false);
-  const [active, setActive] = useState('');
+  const [active, setActive] = useState('home');
   const [menuOpen, setMenuOpen] = useState(false);
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('theme') || 'dark';
-  });
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 40);
+      setScrolled(window.scrollY > 30);
       const sections = document.querySelectorAll('section[id]');
       sections.forEach((s) => {
-        if (window.scrollY >= s.offsetTop - 140) setActive(s.id);
+        if (window.scrollY >= s.offsetTop - 150) setActive(s.id);
       });
     };
     window.addEventListener('scroll', onScroll);
@@ -36,7 +36,13 @@ export default function Navbar() {
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    sfx.click();
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+  };
+
+  const handleNavClick = () => {
+    sfx.click();
+    setMenuOpen(false);
   };
 
   return (
@@ -46,76 +52,131 @@ export default function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
     >
-      <a href="#home" className={styles.logo}>
-        KAVI<span>.</span>
-      </a>
+      <div className={styles.navContainer}>
+        {/* Brand Logo & Telemetry Indicator */}
+        <a href="#home" onClick={() => sfx.click()} className={styles.logo}>
+          <span className={styles.logoPrefix}>KAVI</span>
+          <span className={styles.logoDot}>.</span>
+          <span className={styles.logoSub}>SCADA // DEV</span>
+        </a>
 
-      <ul className={styles.links}>
-        {links.map((l) => (
-          <li key={l.href}>
-            <a
-              href={l.href}
-              className={active === l.href.slice(1) ? styles.active : ''}
-            >
-              {l.label}
-            </a>
-          </li>
-        ))}
-      </ul>
+        {/* Center Desktop Navigation Links */}
+        <ul className={styles.links}>
+          {links.map((l) => (
+            <li key={l.href}>
+              <a
+                href={l.href}
+                onClick={() => sfx.click()}
+                className={active === l.href.slice(1) ? styles.active : ''}
+              >
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
 
-      <button
-        className={styles.themeToggle}
-        onClick={toggleTheme}
-        aria-label="Toggle theme"
-        title={theme === 'dark' ? 'Switch to Day Mode' : 'Switch to Night Mode'}
-      >
-        {theme === 'dark' ? '☀️' : '🌙'}
-      </button>
+        {/* Right Action Tools Cluster */}
+        <div className={styles.navActions}>
+          {/* Command Terminal Trigger Button */}
+          <button
+            onClick={() => {
+              sfx.click();
+              if (onOpenCommandPalette) onOpenCommandPalette();
+            }}
+            className={styles.cmdBtn}
+            title="Open Command HUD (Ctrl+K)"
+          >
+            <Terminal size={14} />
+            <span className={styles.cmdText}>CMD</span>
+            <kbd className={styles.kbd}>⌘K</kbd>
+          </button>
 
-      <a href="mailto:kavistc07@gmail.com" className={styles.cta}>
-        Hire Me
-      </a>
+          {/* Sound FX Toggle Button */}
+          <button
+            onClick={onToggleSound}
+            className={`${styles.iconBtn} ${!isSoundMuted ? styles.soundActive : ''}`}
+            title={isSoundMuted ? 'Unmute Audio FX' : 'Mute Audio FX'}
+          >
+            {isSoundMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+          </button>
 
-      <button
-        className={styles.hamburger}
-        onClick={() => setMenuOpen(!menuOpen)}
-        aria-label="Toggle menu"
-      >
-        <span className={menuOpen ? styles.open : ''} />
-        <span className={menuOpen ? styles.open : ''} />
-      </button>
+          {/* Theme Toggle Button */}
+          <button
+            onClick={toggleTheme}
+            className={styles.iconBtn}
+            title={theme === 'dark' ? 'Switch to Day Light' : 'Switch to Cyber Dark'}
+          >
+            {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+          </button>
 
+          {/* Direct CTA */}
+          <a
+            href="#contact"
+            onClick={() => sfx.click()}
+            className={styles.ctaBtn}
+          >
+            Deploy Me
+          </a>
+
+          {/* Mobile Hamburger Toggle */}
+          <button
+            className={styles.hamburger}
+            onClick={() => {
+              sfx.click();
+              setMenuOpen(!menuOpen);
+            }}
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu Dropdown */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
             className={styles.mobileMenu}
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.2 }}
           >
             {links.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
-                onClick={() => setMenuOpen(false)}
+                onClick={handleNavClick}
+                className={active === l.href.slice(1) ? styles.mobileActive : ''}
               >
                 {l.label}
               </a>
             ))}
-            <button
-              className={styles.mobileThemeToggle}
-              onClick={() => {
-                toggleTheme();
-                setMenuOpen(false);
-              }}
-            >
-              {theme === 'dark' ? '☀️ Switch to Day Mode' : '🌙 Switch to Night Mode'}
-            </button>
+            <div className={styles.mobileTools}>
+              <button
+                onClick={() => {
+                  onToggleSound();
+                  setMenuOpen(false);
+                }}
+                className={styles.mobileToolBtn}
+              >
+                {isSoundMuted ? <VolumeX size={15} /> : <Volume2 size={15} />}
+                <span>{isSoundMuted ? 'Unmute Sound' : 'Mute Sound'}</span>
+              </button>
+              <button
+                onClick={() => {
+                  toggleTheme();
+                  setMenuOpen(false);
+                }}
+                className={styles.mobileToolBtn}
+              >
+                {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
+                <span>{theme === 'dark' ? 'Light Mode' : 'Cyber Mode'}</span>
+              </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
     </motion.nav>
   );
 }
-

@@ -1,112 +1,346 @@
 @use '../styles/variables' as *;
 
-.skills {
-  background: $surface;
-  border-top: 1px solid $border;
-  border-bottom: 1px solid $border;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: $border;
-  margin-bottom: 64px;
-  border: 1px solid $border;
-
-  @media (max-width: $tablet) {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.skillsSection {
+  padding: $section-padding;
+  position: relative;
+  background: var(--bg);
 
   @media (max-width: $mobile) {
+    padding: $section-padding-mobile;
+  }
+}
+
+.sectionHeader {
+  margin-bottom: 36px;
+}
+
+.labelPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: $font-mono;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: #00f0ff;
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  padding: 5px 12px;
+  border-radius: 100px;
+  margin-bottom: 14px;
+}
+
+.sectionTitle {
+  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+  font-family: $font-display;
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+
+  em {
+    font-family: $font-serif;
+    font-style: italic;
+    color: #00f0ff;
+    font-weight: 400;
+  }
+}
+
+.sectionDesc {
+  color: var(--muted);
+  font-size: 1.05rem;
+  max-width: 680px;
+  margin-top: 12px;
+  line-height: 1.6;
+}
+
+// Filter Bar
+.filterBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+
+.filterBtn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--muted);
+  font-family: $font-mono;
+  font-size: 0.76rem;
+  padding: 7px 16px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: var(--white);
+    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  &.activeFilter {
+    background: rgba(0, 240, 255, 0.12);
+    border-color: #00f0ff;
+    color: #00f0ff;
+    font-weight: 600;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+  }
+}
+
+// Layout: Grid + Inspector
+.matrixLayout {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 32px;
+  align-items: start;
+
+  @media (max-width: 1050px) {
     grid-template-columns: 1fr;
   }
 }
 
-.group {
-  background: $surface;
-  padding: 36px 30px;
-  transition: background 0.25s;
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
 
-  &:hover {
-    background: $surface2;
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
   }
 }
 
-.groupTitle {
-  font-family: $font-mono;
-  font-size: 0.68rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  margin-bottom: 24px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid $border;
-}
-
-.items {
+.skillCard {
+  background: rgba(14, 16, 22, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 18px;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: 13px;
+  gap: 10px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  backdrop-filter: blur(10px);
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: var(--node-accent, #00f0ff);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 240, 255, 0.1);
+  }
+
+  &.cardSelected {
+    border-color: var(--node-accent, #00f0ff);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 0 25px rgba(0, 240, 255, 0.15);
+  }
+
+  &.cardConnected {
+    border-color: #00ff87;
+    background: rgba(0, 255, 135, 0.06);
+    animation: pulseRing 1.5s infinite alternate;
+  }
 }
 
-.item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 0.92rem;
-  color: $text;
-  font-weight: 500;
+@keyframes pulseRing {
+  0% { box-shadow: 0 0 8px rgba(0, 255, 135, 0.2); }
+  100% { box-shadow: 0 0 22px rgba(0, 255, 135, 0.4); }
 }
 
-.dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.proficiencies {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  max-width: 720px;
-}
-
-.bar {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.barMeta {
+.cardTop {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.barLabel {
-  font-family: $font-mono;
-  font-size: 0.72rem;
-  color: $muted;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.skillName {
+  font-family: $font-display;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--white);
 }
 
-.barPct {
+.skillLevel {
   font-family: $font-mono;
-  font-size: 0.7rem;
-  color: $accent;
+  font-size: 0.76rem;
+  color: var(--node-accent, #00f0ff);
+  font-weight: 600;
 }
 
-.barTrack {
+.skillMeterTrack {
   height: 3px;
-  background: $border;
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 2px;
   overflow: hidden;
 }
 
-.barFill {
+.skillMeterFill {
   height: 100%;
-  background: linear-gradient(90deg, $accent, $accent2);
   border-radius: 2px;
+}
+
+.nodeTagline {
+  font-size: 0.76rem;
+  color: var(--muted);
+  line-height: 1.4;
+  margin-top: 2px;
+}
+
+.cardBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.connectedCount {
+  font-family: $font-mono;
+  font-size: 0.65rem;
+  color: var(--muted);
+}
+
+.inspectArrow {
+  color: var(--muted);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.skillCard:hover .inspectArrow {
+  transform: translate(2px, -2px);
+  color: var(--white);
+}
+
+// Inspector Dossier Panel
+.inspectorPanel {
+  background: rgba(10, 12, 18, 0.95);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 240, 255, 0.08);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 100px;
+}
+
+.inspectorHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  background: rgba(6, 8, 12, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: $font-mono;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+.inspectSignalDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px currentColor;
+}
+
+.inspectTitle {
+  color: var(--white);
+  font-weight: 700;
+}
+
+.inspectBody {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.inspectNodeName {
+  font-family: $font-display;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.1;
+}
+
+.inspectSubtitle {
+  font-family: $font-mono;
+  font-size: 0.82rem;
+  color: #00f0ff;
+  margin-top: -10px;
+}
+
+.proofCard {
+  background: rgba(0, 255, 135, 0.06);
+  border: 1px solid rgba(0, 255, 135, 0.2);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.proofTitle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: $font-mono;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #00ff87;
+  letter-spacing: 0.06em;
+}
+
+.checkIcon {
+  color: #00ff87;
+}
+
+.proofText {
+  color: #e2e2e8;
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.relSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.relTitle {
+  font-family: $font-mono;
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+.relPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.relPill {
+  font-family: $font-mono;
+  font-size: 0.72rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px 10px;
+  border-radius: 6px;
+  color: var(--white);
+}
+
+.inspectorFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background: rgba(6, 8, 12, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: $font-mono;
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+.proficiencyTag {
+  color: #00ff87;
+  font-weight: 600;
 }

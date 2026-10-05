@@ -1,158 +1,378 @@
 @use '../styles/variables' as *;
 
-.projects {
-  background: $surface;
-  border-top: 1px solid $border;
+.projectsSection {
+  padding: $section-padding;
+  position: relative;
+  background: var(--bg);
+
+  @media (max-width: $mobile) {
+    padding: $section-padding-mobile;
+  }
 }
 
+.sectionHeader {
+  margin-bottom: 56px;
+}
+
+.labelPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: $font-mono;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: #00ff87;
+  background: rgba(0, 255, 135, 0.08);
+  border: 1px solid rgba(0, 255, 135, 0.25);
+  padding: 5px 12px;
+  border-radius: 100px;
+  margin-bottom: 14px;
+}
+
+.sectionTitle {
+  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+  font-family: $font-display;
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+
+  em {
+    font-family: $font-serif;
+    font-style: italic;
+    color: #00ff87;
+    font-weight: 400;
+  }
+}
+
+.sectionDesc {
+  color: var(--muted);
+  font-size: 1.05rem;
+  max-width: 680px;
+  margin-top: 12px;
+  line-height: 1.6;
+}
+
+// Bento Grid
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin-bottom: 48px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
 
-  @media (max-width: $tablet) {
+  @media (max-width: 950px) {
     grid-template-columns: 1fr;
   }
 }
 
-.card {
+.bentoCard {
+  background: rgba(14, 16, 22, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
   position: relative;
-  background: $bg;
-  border: 1px solid $border;
-  border-radius: 10px;
   overflow: hidden;
-  box-shadow: var(--card-shadow);
-  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  backdrop-filter: blur(12px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent-color, #00ff87);
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
+  }
 
   &:hover {
-    border-color: var(--card-accent, rgba(100,255,130,0.3));
-    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.22);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 255, 135, 0.08);
 
-    .cardGlow {
+    &::before {
       opacity: 1;
     }
   }
 }
 
-.cardGlow {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at 75% 20%,
-    var(--glow1),
-    transparent 60%
-  );
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s;
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
 }
 
-.cardInner {
-  padding: 40px;
-  position: relative;
-  z-index: 1;
+.indexBox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-  @media (max-width: $mobile) {
-    padding: 28px 24px;
+.indexNum {
+  font-family: $font-mono;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent-color, #00ff87);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.badgeText {
+  font-family: $font-mono;
+  font-size: 0.66rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+.tabPills {
+  display: flex;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 2px;
+}
+
+.tabBtn {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-family: $font-mono;
+  font-size: 0.72rem;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: var(--white);
+  }
+
+  &.tabActive {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--white);
+    font-weight: 600;
   }
 }
 
-.num {
+.titleArea {
+  margin-bottom: 14px;
+}
+
+.projectTitle {
+  font-family: $font-display;
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.projectSubtitle {
   font-family: $font-mono;
-  font-size: 0.65rem;
-  color: $muted;
-  letter-spacing: 0.12em;
-  margin-bottom: 20px;
+  font-size: 0.78rem;
+  color: #00f0ff;
+  letter-spacing: 0.04em;
 }
 
-.title {
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: $white;
-  margin-bottom: 8px;
-  letter-spacing: -0.01em;
+.contentArea {
+  min-height: 120px;
+  margin-bottom: 18px;
 }
 
-.subtitle {
-  font-family: $font-mono;
-  font-size: 0.72rem;
-  color: $accent2;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-}
-
-.desc {
-  color: $muted;
-  font-size: 0.9rem;
-  line-height: 1.75;
-  margin-bottom: 24px;
-}
-
-.impact {
-  background: var(--impact-bg);
-  border: 1px solid var(--impact-border);
-  border-radius: 5px;
-  padding: 12px 16px;
-  font-family: $font-mono;
-  font-size: 0.73rem;
-  color: $accent;
-  margin-bottom: 24px;
+.tabContent {
   display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  line-height: 1.5;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.descText {
+  color: var(--text);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.impactHighlight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 255, 135, 0.08);
+  border: 1px solid rgba(0, 255, 135, 0.25);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  color: #00ff87;
+  font-weight: 600;
+  font-family: $font-mono;
 }
 
 .impactIcon {
-  font-size: 0.85rem;
+  color: #00ff87;
   flex-shrink: 0;
-  margin-top: 1px;
 }
 
-.tech {
+.archBox {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 12px 14px;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 8px;
 }
 
-.badge {
+.archLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.65rem;
+  color: #ffd166;
   font-family: $font-mono;
-  font-size: 0.67rem;
-  padding: 5px 12px;
-  background: $surface2;
-  border: 1px solid $border;
-  border-radius: 3px;
-  color: $muted;
-  letter-spacing: 0.06em;
-  transition: $transition;
-
-  &:hover {
-    border-color: rgba(61, 232, 192, 0.3);
-    color: $accent2;
-  }
+  letter-spacing: 0.08em;
+  font-weight: 700;
 }
 
-.cta {
+.archFlow {
+  font-family: $font-mono;
+  font-size: 0.76rem;
+  color: #e2e2e8;
+  line-height: 1.5;
+}
+
+// Metrics Grid
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 16px;
+}
+
+.metricBlock {
+  display: flex;
+  flex-direction: column;
   text-align: center;
 }
 
-.ctaLink {
+.metricVal {
+  font-family: $font-display;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.metricLbl {
   font-family: $font-mono;
-  font-size: 0.75rem;
-  color: $muted;
-  letter-spacing: 0.12em;
+  font-size: 0.62rem;
+  color: var(--muted);
   text-transform: uppercase;
-  transition: color 0.2s;
+}
+
+// Tech Stack
+.techStack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.techPill {
+  font-family: $font-mono;
+  font-size: 0.68rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  padding: 3px 8px;
+  color: var(--muted);
+}
+
+// Card Footer
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 12px;
+}
+
+.liveSimBtn {
+  background: rgba(0, 255, 135, 0.1);
+  border: 1px solid rgba(0, 255, 135, 0.35);
+  color: #00ff87;
+  font-family: $font-mono;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  border-bottom: 1px solid $border;
-  padding-bottom: 4px;
+  gap: 6px;
+  transition: all 0.2s ease;
 
   &:hover {
-    color: $accent;
-    border-color: $accent;
+    background: #00ff87;
+    color: #080a0e;
+    box-shadow: 0 0 16px rgba(0, 255, 135, 0.4);
+  }
+}
+
+.pulseRadio {
+  animation: pulseGlow 1.8s infinite ease-in-out;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+.codeLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: $font-mono;
+  font-size: 0.74rem;
+  color: var(--muted);
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: var(--white);
+  }
+}
+
+// GitHub CTA
+.githubCta {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.githubBtn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--white);
+  font-family: $font-mono;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.25s ease;
+
+  &:hover {
+    background: rgba(0, 255, 135, 0.1);
+    border-color: #00ff87;
+    color: #00ff87;
+    box-shadow: 0 0 25px rgba(0, 255, 135, 0.2);
+    transform: translateY(-2px);
   }
 }

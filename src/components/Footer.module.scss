@@ -1,63 +1,136 @@
 @use '../styles/variables' as *;
 
 .footer {
-  padding: 28px 60px;
-  border-top: 1px solid $border;
+  padding: 40px 48px;
+  background: rgba(6, 8, 12, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: $font-mono;
+  position: relative;
+  z-index: 10;
+
+  @media (max-width: $mobile) {
+    padding: 30px 20px 80px;
+  }
+}
+
+.footerContainer {
+  max-width: 1380px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: $bg;
+  gap: 24px;
   flex-wrap: wrap;
-  gap: 12px;
 
-  @media (max-width: $mobile) {
-    padding: 24px;
+  @media (max-width: 900px) {
     flex-direction: column;
-    text-align: center;
-    gap: 8px;
+    align-items: flex-start;
   }
 }
 
 .left {
   display: flex;
-  align-items: center;
-  gap: 16px;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.logo {
+.brand {
+  font-family: $font-display;
+  font-size: 1.3rem;
   font-weight: 800;
-  font-size: 0.95rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: $white;
+  color: var(--white);
 
-  span { color: $accent; }
+  span {
+    color: #00ff87;
+  }
 }
 
-.copy {
-  font-family: $font-mono;
-  font-size: 0.68rem;
-  color: $muted;
+.tagline {
+  font-size: 0.76rem;
+  color: var(--muted);
+}
+
+.coords {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 0.08em;
 }
 
 .center {
-  font-family: $font-mono;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+
+  @media (max-width: 900px) {
+    align-items: flex-start;
+  }
+}
+
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-size: 0.68rem;
-  color: $muted;
+  color: #00ff87;
+  background: rgba(0, 255, 135, 0.08);
+  border: 1px solid rgba(0, 255, 135, 0.25);
+  padding: 4px 10px;
+  border-radius: 100px;
+  letter-spacing: 0.05em;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00ff87;
+  box-shadow: 0 0 6px #00ff87;
+}
+
+.copy {
+  font-size: 0.68rem;
+  color: var(--muted);
 }
 
 .right {
   display: flex;
-  gap: 24px;
+  align-items: center;
+  gap: 20px;
+}
+
+.links {
+  display: flex;
+  gap: 16px;
 
   a {
-    font-family: $font-mono;
-    font-size: 0.68rem;
-    color: $muted;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    transition: color 0.2s;
+    font-size: 0.8rem;
+    color: var(--muted);
+    transition: color 0.2s ease;
 
-    &:hover { color: $accent; }
+    &:hover {
+      color: #00ff87;
+    }
+  }
+}
+
+.topBtn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--white);
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: $font-mono;
+  font-size: 0.72rem;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(0, 255, 135, 0.1);
+    border-color: #00ff87;
+    color: #00ff87;
   }
 }
