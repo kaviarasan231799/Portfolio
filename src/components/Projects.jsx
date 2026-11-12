@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Terminal, ExternalLink, Cpu, Database, Radio, CheckCircle, Zap } from 'lucide-react';
+import { Terminal, ExternalLink, Cpu, Database, Radio, CheckCircle, Zap, Globe } from 'lucide-react';
 import { projects } from '../data/portfolio';
 import { sfx } from '../utils/audio';
 import styles from './Projects.module.scss';
@@ -9,16 +9,26 @@ import styles from './Projects.module.scss';
 // Extended technical metadata for the modern bento showcase
 const PROJECT_EXTENSIONS = {
   1: {
-    badge: 'FLAGSHIP INDUSTRIAL CLIENT',
-    architecture: 'React Frontend ⇄ WebSocket Gateway ⇄ Microservices ⇄ MS SQL Server (Sensor Buffering & Threshold Triggers)',
+    badge: 'LIVE PRODUCTION PLATFORM',
+    architecture: 'Three.js 3D Viewer ⇄ React UI ⇄ Express REST APIs ⇄ MySQL Quotation Engine ⇄ Cloudinary Storage & PDF Service',
     metrics: [
-      { label: 'Downtime Averted', val: '20%' },
-      { label: 'Data Sampling Rate', val: '100ms' },
-      { label: 'Sensor Channels', val: '16 Parallel' },
+      { label: 'Turnaround', val: 'Instant Quote' },
+      { label: '3D Preview Engine', val: 'Three.js' },
+      { label: 'Storage & PDF', val: 'Cloudinary' },
     ],
-    machineId: 'amigos-04',
+    machineId: null,
   },
   2: {
+    badge: 'MANUFACTURING ERP',
+    architecture: 'React Component Library ⇄ Node.js / Express REST APIs ⇄ MS SQL Server (Inventory, PO, Production & Quality Stored Procs)',
+    metrics: [
+      { label: 'Core Modules', val: '7+ ERP Modules' },
+      { label: 'Database Backend', val: 'MS SQL Server' },
+      { label: 'Architecture', val: 'Full-Stack REST' },
+    ],
+    machineId: null,
+  },
+  3: {
     badge: 'CLIENT DEPLOYMENT',
     architecture: 'IoT Spectrometer Probes ⇄ Node.js Stream Pipeline ⇄ MS SQL Schema ⇄ Foundry Production Analytics UI',
     metrics: [
@@ -28,7 +38,7 @@ const PROJECT_EXTENSIONS = {
     ],
     machineId: 'psg-spec-02',
   },
-  3: {
+  4: {
     badge: 'OPEN SOURCE / SIMULATOR',
     architecture: 'Socket.io Cluster ⇄ Express Server ⇄ React Dynamic Visualizers ⇄ Push Notification Webhooks',
     metrics: [
@@ -38,7 +48,7 @@ const PROJECT_EXTENSIONS = {
     ],
     machineId: 'telemetry-01',
   },
-  4: {
+  5: {
     badge: 'FULL-STACK ANALYTICS',
     architecture: 'MS SQL Server Query Optimization ⇄ Stored Procedures ⇄ Node.js REST API ⇄ React Reporting Engine',
     metrics: [
@@ -171,20 +181,34 @@ function BentoProjectCard({ project, index, onSimulateProject }) {
 
       {/* Action Footer */}
       <div className={styles.cardFooter}>
-        {ext.machineId && (
-          <button onClick={handleSimulate} className={styles.liveSimBtn}>
-            <Radio size={14} className={styles.pulseRadio} />
-            <span>⚡ Test in IoT Simulator</span>
-          </button>
-        )}
+        <div className={styles.actionGroup}>
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => sfx.click()}
+              className={styles.liveLinkBtn}
+            >
+              <Globe size={13} />
+              <span>Live Platform</span>
+            </a>
+          )}
+          {ext.machineId && (
+            <button onClick={handleSimulate} className={styles.liveSimBtn}>
+              <Radio size={14} className={styles.pulseRadio} />
+              <span>⚡ Test in IoT Simulator</span>
+            </button>
+          )}
+        </div>
         <a
-          href="https://github.com/kaviarasan231799"
+          href={project.githubUrl || 'https://github.com/kaviarasan231799'}
           target="_blank"
           rel="noreferrer"
           onClick={() => sfx.click()}
           className={styles.codeLink}
         >
-          <span>Repository</span>
+          <span>{project.githubUrl && project.githubUrl.includes('/Bharani') ? 'View Code' : 'Repository'}</span>
           <ExternalLink size={13} />
         </a>
       </div>

@@ -82,7 +82,7 @@ export default function CommandPalette({ isOpen, onClose, onToggleSound, isSound
       id: 'projects',
       category: 'Navigation',
       title: 'Jump to Featured Projects',
-      desc: 'Explore Amigos Die Casting, PSG Foundry, and Telemetry Suite',
+      desc: 'Explore Rapid3D, Barani DRP, PSG Foundry, and Telemetry Suite',
       icon: <Terminal size={16} className={styles.iconCyan} />,
       perform: () => navigateTo('#projects'),
     },

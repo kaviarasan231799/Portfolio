@@ -69,7 +69,7 @@ export default function About() {
               </p>
 
               <div className={styles.highlightQuote}>
-                "Helping industrial leaders like Amigos Die Casting reduce unplanned machinery downtime by 20% through real-time predictive alerting."
+                "Helping manufacturing and foundry clients reduce unplanned machinery downtime by 20% through real-time predictive alerting."
               </div>
 
               <div className={styles.specList}>

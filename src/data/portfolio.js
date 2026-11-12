@@ -20,17 +20,17 @@ export const skills = [
   {
     category: 'Backend & Real-Time APIs',
     color: 'accent2',
-    items: ['Node.js', 'Express.js', 'Java', 'RESTful APIs', 'WebSocket Data Streaming'],
+    items: ['Node.js', 'Express.js', 'Java (Basic)', 'RESTful APIs', 'WebSocket Data Streaming'],
   },
   {
     category: 'Database Architecture',
     color: 'accent3',
-    items: ['MS SQL Server', 'SQL', 'Query Optimization', 'Schema Design'],
+    items: ['MS SQL Server', 'MySQL', 'SQL', 'Query Optimization', 'Schema Design'],
   },
   {
-    category: 'Tools & DevOps',
+    category: 'Tools & Cloud',
     color: 'yellow',
-    items: ['Git & GitHub', 'Postman', 'Nginx', 'AWS EC2 (Basic)'],
+    items: ['Git & GitHub', 'Postman', 'Nginx', 'AWS EC2 (Basic)', 'Cloudinary'],
   },
 ];
 
@@ -71,19 +71,36 @@ export const projects = [
   {
     id: 1,
     num: '01',
-    title: 'Amigos Die Casting',
-    subtitle: 'Industrial Monitoring System (Client Project)',
+    title: 'Rapid3D',
+    subtitle: '3D Printing Quotation Platform',
+    liveUrl: 'https://quote.rapid3d.co.in',
+    githubUrl: 'https://github.com/kaviarasan231799',
     description:
-      'A real-time industrial monitoring web application tracking live voltage, current, and temperature data across factory equipment. Features dynamic dashboards powered by WebSocket streaming with instant alert notifications for threshold breaches.',
-    impact: '⚡ Reduced equipment downtime by 20% & significantly improved operational visibility',
-    tech: ['React.js', 'Node.js', 'MS SQL Server', 'WebSocket'],
-    accent: '#64ff82',
+      'A high-performance web platform where users upload 3D models and receive instant quotations for 3D printing requirements. Features technology & material selection workflows with real-time cost calculation algorithms, dynamic 3D model visualization, automated PDF quotation generation, and Cloudinary storage.',
+    impact: '⚡ Instant 3D model quotation engine with dynamic pricing calculations & automated PDF generation',
+    tech: ['React.js', 'Node.js', 'Express.js', 'Three.js', 'MySQL', 'Cloudinary', 'PDF Generation'],
+    accent: '#00f0ff',
   },
   {
     id: 2,
     num: '02',
-    title: 'PSG & Sons\' Charities',
+    title: 'Barani DRP',
+    subtitle: 'Manufacturing ERP System',
+    liveUrl: null,
+    githubUrl: 'https://github.com/kaviarasan231799/Bharani',
+    description:
+      'A comprehensive manufacturing ERP solution built to streamline operations across inventory, production planning, stores, purchase orders, quality assurance, accounts, and reporting. Delivers responsive React interfaces, robust REST APIs, and optimized SQL data handling for stock and procurement workflows.',
+    impact: '⚡ Streamlined manufacturing operations & real-time visibility across 7+ core business modules',
+    tech: ['React.js', 'Node.js', 'Express.js', 'MS SQL Server', 'REST APIs'],
+    accent: '#64ff82',
+  },
+  {
+    id: 3,
+    num: '03',
+    title: "PSG & Sons' Charities",
     subtitle: 'Metallurgy & Foundry Division (Client Project)',
+    liveUrl: null,
+    githubUrl: 'https://github.com/kaviarasan231799',
     description:
       'An IoT-enabled dashboard built to monitor spectrometer readings and raw material usage in real time. Integrated live IoT sensor feeds for temperature analysis and material consumption tracking to empower production managers.',
     impact: '⚡ Improved operational efficiency & production monitoring accuracy across foundry division',
@@ -91,21 +108,25 @@ export const projects = [
     accent: '#3de8c0',
   },
   {
-    id: 3,
-    num: '03',
+    id: 4,
+    num: '04',
     title: 'Real-Time IoT Sensor Telemetry Suite',
     subtitle: 'Open Source / Demo Project',
+    liveUrl: null,
+    githubUrl: 'https://github.com/kaviarasan231799',
     description:
       'Interactive multi-device simulator & live monitoring suite. Streams mock sensor data (voltage spikes, heat maps, vibration analysis) via Socket.io with dynamic charts and instant push notifications.',
     impact: '⚡ Showcases end-to-end WebSocket architecture and real-time frontend charts',
     tech: ['React.js', 'Express.js', 'Socket.io', 'Chart.js'],
-    accent: '#00e5ff',
+    accent: '#a78bfa',
   },
   {
-    id: 4,
-    num: '04',
+    id: 5,
+    num: '05',
     title: 'Smart Predictive Maintenance Portal',
     subtitle: 'Analytics & Reporting Application',
+    liveUrl: null,
+    githubUrl: 'https://github.com/kaviarasan231799',
     description:
       'Full-stack management portal providing historical machine uptime analytics, automated SQL reporting, shift maintenance logs, and exportable PDF audit summary reports.',
     impact: '⚡ Demonstrates complex SQL query optimization, data aggregation, and report generation',
@@ -134,14 +155,14 @@ export const education = [
 
 export const stats = [
   { num: '2+', label: 'Years Experience' },
-  { num: '4+', label: 'Projects Built' },
+  { num: '5+', label: 'Projects Built' },
   { num: '20%', label: 'Downtime Reduced' },
-  { num: '10+', label: 'Tech Stack Skills' },
+  { num: '12+', label: 'Tech Stack Skills' },
 ];
 
 export const marqueeItems = [
-  'React.js', 'Node.js', 'WebSocket', 'MS SQL Server',
-  'IoT Monitoring', 'REST APIs', 'Express.js', 'Real-Time Dashboards',
+  'React.js', 'Node.js', 'Three.js', 'WebSocket', 'MS SQL Server', 'MySQL',
+  'Cloudinary', 'IoT Monitoring', 'REST APIs', 'Express.js', 'Real-Time Dashboards',
   'Java', 'TypeScript', 'AWS EC2', 'Bootstrap', 'Nginx', 'Git & GitHub',
 ];
 

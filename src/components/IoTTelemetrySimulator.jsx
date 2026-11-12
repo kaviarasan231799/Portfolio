@@ -6,9 +6,9 @@ import styles from './IoTTelemetrySimulator.module.scss';
 
 const MACHINES = [
   {
-    id: 'amigos-04',
+    id: 'casting-04',
     name: 'Die-Casting Cell #04',
-    client: 'Amigos Die Casting',
+    client: 'Precision Die Casting',
     nominalTemp: 74,
     nominalVolt: 415,
     nominalAmp: 38.5,

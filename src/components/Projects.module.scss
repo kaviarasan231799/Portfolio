@@ -97,6 +97,12 @@
       opacity: 1;
     }
   }
+
+  &:nth-child(5):last-child {
+    @media (min-width: 951px) {
+      grid-column: 1 / -1;
+    }
+  }
 }
 
 .cardHeader {
@@ -300,6 +306,36 @@
   padding-top: 14px;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   gap: 12px;
+  flex-wrap: wrap;
+}
+
+.actionGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.liveLinkBtn {
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  color: #00f0ff;
+  font-family: $font-mono;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #00f0ff;
+    color: #080a0e;
+    box-shadow: 0 0 16px rgba(0, 240, 255, 0.45);
+  }
 }
 
 .liveSimBtn {
